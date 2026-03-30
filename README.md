@@ -1,43 +1,33 @@
 # Chat + Auth + Stripe Template for Next.js / ChatBotKit / JS
 
-A production-ready chat application template with authentication, conversation persistence, and full ChatBotKit platform integration — built with Next.js, ChatBotKit SDK, next-auth, and shadcn/ui.
+A production-ready chat application template with authentication, conversation persistence, and full ChatBotKit platform integration - built with Next.js, ChatBotKit SDK, next-auth, and shadcn/ui.
 
 ## Why ChatBotKit?
 
-Most chat templates wire up a raw LLM call (e.g. OpenAI directly) and leave everything else — tools, data sources, guardrails, authentication — as an exercise for the developer. This template takes a fundamentally different approach by connecting to **ChatBotKit platform agents** (bots).
+Building an AI chat product typically means sourcing models, a conversation layer, background processing, storage, a tested abilities catalogue, authentication, security, monitoring, and more from separate systems. The cost adds up fast - not just in money, but in engineering time.
 
-When you select an agent in the dropdown, you get the **full set of capabilities** configured on the ChatBotKit platform, not just a model and a prompt. This includes:
-
-- **Skills (Abilities)** — Agents can browse the web, generate images, run code, interact with files, and much more — all configured through the platform without writing additional code in your app.
-- **Datasets & Knowledge Bases** — Attach documents, websites, and structured data directly to your agent. RAG retrieval happens on the platform side, so your app stays lean.
-- **Third-Party Service Authentication** — Agents can authenticate with external services like Google Calendar, Notion, Slack, GitHub, and others via the platform's built-in secret management and OAuth flows. Your frontend never touches those credentials.
-- **Sitemap & Data Ingestion** — Automatically crawl and index entire websites or Notion workspaces to build agent knowledge.
-- **Guardrails & Moderation** — Content moderation, PII filtering, and custom guardrails are handled at the platform level, not in your application code.
-- **Model Flexibility** — Switch between OpenAI, Anthropic, Google, and other providers per-agent on the platform. No code changes needed.
-- **Contact & Conversation Management** — Each authenticated user is tracked as a contact, with full conversation history and message persistence managed through the platform API.
-
-The key insight is that your application is a **thin client** — the intelligence, configuration, and integrations live on the platform. You can update agent behavior, swap models, add new skills, or connect new data sources without redeploying your app.
+ChatBotKit brings all of this into one platform. This template gets you started with a monetizable chat app where your agents, skills, datasets, third-party integrations, guardrails, and conversation history are all managed through a single API - no need to stitch together disparate services.
 
 ## Features
 
-- **Authentication** — Google OAuth via next-auth with JWT sessions
-- **Protected Routes** — Middleware-based route protection for `/chat`
-- **Streaming Chat** — Real-time AI responses using ChatBotKit streaming with `onStart`/`onFinish` lifecycle hooks
-- **Platform Agents** — Select from your ChatBotKit bots via a dropdown (with optional filtering via `CHATBOTKIT_BOT_IDS`)
-- **Conversation Persistence** — Conversations are saved to the platform and associated with contacts, so users can resume past conversations
-- **Conversation History** — Slide-out sidebar showing previous conversations with auto-generated labels
-- **Contact Tracking** — Authenticated users are automatically mapped to ChatBotKit contacts by email
-- **Stripe Billing** — Subscription checkout, trials, billing portal, and access gating for SaaS-style plans
-- **Modern UI** — Built with shadcn/ui components and Tailwind CSS
-- **Server Actions** — Next.js server actions for secure API communication (API keys never reach the client)
+- **Authentication** - Google OAuth via next-auth with JWT sessions
+- **Protected Routes** - Middleware-based route protection for `/chat`
+- **Streaming Chat** - Real-time AI responses using ChatBotKit streaming with `onStart`/`onFinish` lifecycle hooks
+- **Platform Agents** - Select from your ChatBotKit bots via a dropdown (with optional filtering via `CHATBOTKIT_BOT_IDS`)
+- **Conversation Persistence** - Conversations are saved to the platform and associated with contacts, so users can resume past conversations
+- **Conversation History** - Slide-out sidebar showing previous conversations with auto-generated labels
+- **Contact Tracking** - Authenticated users are automatically mapped to ChatBotKit contacts by email
+- **Stripe Billing** - Subscription checkout, trials, billing portal, and access gating for SaaS-style plans
+- **Modern UI** - Built with shadcn/ui components and Tailwind CSS
+- **Server Actions** - Next.js server actions for secure API communication (API keys never reach the client)
 
 ## Technology Stack
 
-- **Next.js 14** — App Router with server actions
-- **ChatBotKit SDK** — `@chatbotkit/react` for client-side streaming, `@chatbotkit/sdk` for server-side API
-- **next-auth** — Authentication with Google OAuth provider (extensible to GitHub, email, etc.)
-- **shadcn/ui** — Accessible UI components built on Radix primitives
-- **Tailwind CSS** — Utility-first styling with dark mode support
+- **Next.js 14** - App Router with server actions
+- **ChatBotKit SDK** - `@chatbotkit/react` for client-side streaming, `@chatbotkit/sdk` for server-side API
+- **next-auth** - Authentication with Google OAuth provider (extensible to GitHub, email, etc.)
+- **shadcn/ui** - Accessible UI components built on Radix primitives
+- **Tailwind CSS** - Utility-first styling with dark mode support
 
 ## Setup
 
@@ -81,26 +71,26 @@ Open [http://localhost:3000](http://localhost:3000) to get started.
 | ----------------------- | -------- | --------------------------------------------------------------------------------- |
 | `CHATBOTKIT_API_SECRET` | Yes      | ChatBotKit API token from [chatbotkit.com/tokens](https://chatbotkit.com/tokens)  |
 | `CHATBOTKIT_BOT_IDS`    | No       | Comma-separated bot IDs to show (e.g., `bot_abc,bot_def`). Omit to show all bots. |
-| `NEXTAUTH_SECRET`       | Yes      | Random secret for JWT signing — generate with `openssl rand -base64 32`           |
+| `NEXTAUTH_SECRET`       | Yes      | Random secret for JWT signing - generate with `openssl rand -base64 32`           |
 | `NEXTAUTH_URL`          | Yes      | Your app URL (e.g., `http://localhost:3000`)                                      |
 | `GOOGLE_CLIENT_ID`      | Yes      | Google OAuth client ID                                                            |
 | `GOOGLE_CLIENT_SECRET`  | Yes      | Google OAuth client secret                                                        |
-| `STRIPE_SECRET_KEY`     | Yes*     | Stripe secret API key                                                             |
-| `STRIPE_PRICE_MONTHLY`  | Yes*     | Stripe Price ID for your monthly subscription                                     |
+| `STRIPE_SECRET_KEY`     | Yes\*    | Stripe secret API key                                                             |
+| `STRIPE_PRICE_MONTHLY`  | Yes\*    | Stripe Price ID for your monthly subscription                                     |
 | `STRIPE_PRICE_YEARLY`   | No       | Stripe Price ID for your yearly subscription                                      |
 | `STRIPE_TRIAL_DAYS`     | No       | Trial length in days for new subscriptions (default: `14`)                        |
 | `STRIPE_WEBHOOK_SECRET` | No       | Stripe webhook signing secret for `/api/stripe/webhook`                           |
 
 \* Required only when you want to enforce paid access.
 
-> **Note:** The AI model, backstory, skills, datasets, and all other agent configuration is managed per-bot on the [ChatBotKit platform](https://chatbotkit.com). Your app simply references the bot by ID — all capabilities come from the platform.
+> **Note:** The AI model, backstory, skills, datasets, and all other agent configuration is managed per-bot on the [ChatBotKit platform](https://chatbotkit.com). Your app simply references the bot by ID - all capabilities come from the platform.
 
 ### Getting a ChatBotKit API Token
 
 1. Sign up or log in at [chatbotkit.com](https://chatbotkit.com)
 2. Go to [chatbotkit.com/tokens](https://chatbotkit.com/tokens)
 3. Create a new API token and copy it to your `.env` file
-4. Create at least one bot at [chatbotkit.com](https://chatbotkit.com) — it will appear in the agent dropdown
+4. Create at least one bot at [chatbotkit.com](https://chatbotkit.com) - it will appear in the agent dropdown
 
 ### Getting Google OAuth Credentials
 
@@ -124,13 +114,13 @@ Browser (React)          Server Actions           ChatBotKit Platform
 └──────────────┘        └──────────────┘         └──────────────────┘
 ```
 
-1. **Authentication** — User signs in via Google OAuth. The session is JWT-based (24h expiry).
-2. **Contact Resolution** — On first chat load, the user's email is used to ensure a contact exists on the ChatBotKit platform via `cbk.contact.ensure()`.
-3. **Bot Selection** — Available bots are fetched from the platform. The user selects one from the dropdown.
-4. **Streaming** — Messages are sent via server actions. The `streamComplete` function streams the response token-by-token back to the browser.
-5. **Persistence** — `onStart` creates a conversation on the platform; `onFinish` saves all messages and generates a label. The conversation is linked to the contact.
-6. **History** — The sidebar fetches past conversations for the current contact and allows resuming them.
-7. **Billing Gate** — Chat routes and server actions check Stripe subscription/trial status before allowing access.
+1. **Authentication** - User signs in via Google OAuth. The session is JWT-based (24h expiry).
+2. **Contact Resolution** - On first chat load, the user's email is used to ensure a contact exists on the ChatBotKit platform via `cbk.contact.ensure()`.
+3. **Bot Selection** - Available bots are fetched from the platform. The user selects one from the dropdown.
+4. **Streaming** - Messages are sent via server actions. The `streamComplete` function streams the response token-by-token back to the browser.
+5. **Persistence** - `onStart` creates a conversation on the platform; `onFinish` saves all messages and generates a label. The conversation is linked to the contact.
+6. **History** - The sidebar fetches past conversations for the current contact and allows resuming them.
+7. **Billing Gate** - Chat routes and server actions check Stripe subscription/trial status before allowing access.
 
 ### Stripe SaaS Billing Flow
 
@@ -154,10 +144,10 @@ Browser (React)          Server Actions           ChatBotKit Platform
 
 ### Stateless Streaming with Server-Side Persistence
 
-The chat uses a **stateless streaming** pattern — the full message history is sent with every request (no server-side session). Persistence is handled via lifecycle callbacks:
+The chat uses a **stateless streaming** pattern - the full message history is sent with every request (no server-side session). Persistence is handled via lifecycle callbacks:
 
-- **`onStart`** — Creates a new conversation on the platform (or reuses an existing one) and links it to the contact and bot.
-- **`onFinish`** — Saves all messages to the conversation and generates a human-readable label from the first exchange.
+- **`onStart`** - Creates a new conversation on the platform (or reuses an existing one) and links it to the contact and bot.
+- **`onFinish`** - Saves all messages to the conversation and generates a human-readable label from the first exchange.
 
 This gives you the simplicity of stateless streaming with the durability of platform-managed conversations.
 
@@ -210,7 +200,7 @@ The template fetches your bots directly from the ChatBotKit platform. To configu
 3. The bots will automatically appear in the agent dropdown
 4. Optionally set `CHATBOTKIT_BOT_IDS` in `.env` to restrict which bots are shown
 
-When a bot is selected, its **full platform configuration** is used — including all skills, datasets, connected services, and guardrails. You can update any of these on the platform and the changes take effect immediately, without redeploying your app.
+When a bot is selected, its **full platform configuration** is used - including all skills, datasets, connected services, and guardrails. You can update any of these on the platform and the changes take effect immediately, without redeploying your app.
 
 ### Filter Available Bots
 
