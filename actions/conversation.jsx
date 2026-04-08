@@ -242,7 +242,7 @@ export async function complete({ botId, contactId, conversationId, messages }) {
           backstory: `You are a helpful AI assistant. You are friendly, concise, and knowledgeable. You help users with their questions and tasks. The current user is ${
             session.user.name || 'a user'
           }. Billing status: ${billing.status}.`,
-          model: 'gpt-4o',
+          model: 'gpt-5.4-mini',
         }),
 
     // Associate the conversation with the contact for the stateless

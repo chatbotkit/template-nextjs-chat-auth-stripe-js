@@ -2,6 +2,8 @@
 
 A production-ready chat application template with authentication, conversation persistence, and full ChatBotKit platform integration - built with Next.js, ChatBotKit SDK, next-auth, and shadcn/ui.
 
+> **Note:** This template is deliberately bare-bones. It provides the minimal structure and wiring needed to get a working app, intentionally leaving styling, layout, and architectural choices open so you can build on top without fighting existing opinions.
+
 ## Why ChatBotKit?
 
 Building an AI chat product typically means sourcing models, a conversation layer, background processing, storage, a tested abilities catalogue, authentication, security, monitoring, and more from separate systems. The cost adds up fast - not just in money, but in engineering time.
@@ -85,12 +87,16 @@ Open [http://localhost:3000](http://localhost:3000) to get started.
 
 > **Note:** The AI model, backstory, skills, datasets, and all other agent configuration is managed per-bot on the [ChatBotKit platform](https://chatbotkit.com). Your app simply references the bot by ID - all capabilities come from the platform.
 
-### Getting a ChatBotKit API Token
+### Setting Up ChatBotKit
 
 1. Sign up or log in at [chatbotkit.com](https://chatbotkit.com)
-2. Go to [chatbotkit.com/tokens](https://chatbotkit.com/tokens)
-3. Create a new API token and copy it to your `.env` file
-4. Create at least one bot at [chatbotkit.com](https://chatbotkit.com) - it will appear in the agent dropdown
+2. Go to [chatbotkit.com/tokens](https://chatbotkit.com/tokens) and create an API token
+3. Create at least one bot and configure it with:
+   - A **backstory** describing the agent's personality and purpose
+   - A **model** (e.g., GPT-5.4 Mini, Claude Sonnet 4.6)
+   - Optional: a **skillset** with abilities and **datasets** for RAG
+4. Copy the API token to `CHATBOTKIT_API_SECRET` in your `.env` file
+5. The bot will appear in the agent dropdown. Optionally set `CHATBOTKIT_BOT_IDS` to restrict which bots are shown.
 
 ### Getting Google OAuth Credentials
 
