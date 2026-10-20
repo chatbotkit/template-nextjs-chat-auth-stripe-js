@@ -73,7 +73,7 @@ Open [http://localhost:3000](http://localhost:3000) to get started.
 
 | Variable                | Required | Description                                                                       |
 | ----------------------- | -------- | --------------------------------------------------------------------------------- |
-| `CHATBOTKIT_API_SECRET` | Yes      | ChatBotKit API token from [chatbotkit.com/tokens](https://chatbotkit.com/tokens)  |
+| `CHATBOTKIT_API_TOKEN` | Yes      | ChatBotKit API token from [chatbotkit.com/tokens](https://chatbotkit.com/tokens)  |
 | `CHATBOTKIT_BOT_IDS`    | No       | Comma-separated bot IDs to show (e.g., `bot_abc,bot_def`). Omit to show all bots. |
 | `NEXTAUTH_SECRET`       | Yes      | Random secret for JWT signing - generate with `openssl rand -base64 32`           |
 | `NEXTAUTH_URL`          | Yes      | Your app URL (e.g., `http://localhost:3000`)                                      |
@@ -97,7 +97,7 @@ Open [http://localhost:3000](http://localhost:3000) to get started.
    - A **backstory** describing the agent's personality and purpose
    - A **model** (e.g., GPT-5.4 Mini, Claude Sonnet 4.6)
    - Optional: a **skillset** with abilities and **datasets** for RAG
-4. Copy the API token to `CHATBOTKIT_API_SECRET` in your `.env` file
+4. Copy the API token to `CHATBOTKIT_API_TOKEN` in your `.env` file
 5. The bot will appear in the agent dropdown. Optionally set `CHATBOTKIT_BOT_IDS` to restrict which bots are shown.
 
 ### Getting Google OAuth Credentials
